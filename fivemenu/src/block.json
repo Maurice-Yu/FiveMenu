@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/fivemenu",
+	"version": "0.1.0",
+	"title": "Fivemenu",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"attributes":{
+		"ItemCatagory1":{
+			"type": "string",
+			"default":"click to edit text"
+		},
+		"ItemCatagory2":{
+			"type": "string",
+			"default":"click to edit text"
+		},
+		"ItemCatagory3":{
+			"type": "string",
+			"default":"click to edit text"
+		},
+		"ItemCatagory4":{
+			"type": "string",
+			"default":"click to edit text"
+		},
+		"ItemCatagory5":{
+			"type": "string",
+			"default":"click to edit text"
+		}
+
+
+	},
+	"textdomain": "fivemenu",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

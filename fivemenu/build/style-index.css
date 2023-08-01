@@ -1,0 +1,71 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-fivemenu {
+  background-color: #21759b;
+  color: #fff;
+  padding: 2px;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000;
+}
+
+/* Style for the category cells */
+.menu-category {
+  width: 100%;
+  border: 1px solid #000;
+}
+
+/* Style for the category names */
+.menu-category strong {
+  display: block;
+  text-align: center;
+  background-color: #f1f1f1;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+/* Style for the unordered lists */
+.menu-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Style for the list items */
+.menu-category li {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+/* Additional custom styles for each section */
+/* You can add more styles as needed */
+.category1 {
+  color: #ff0000; /* Red font color */
+}
+
+.category2 {
+  color: #00ff00; /* Green font color */
+}
+
+.category3 {
+  color: #0000ff; /* Blue font color */
+}
+
+.category4 {
+  color: #ff8000; /* Orange font color */
+}
+
+.category5 {
+  color: #8000ff; /* Purple font color */
+}
+
+/*# sourceMappingURL=style-index.css.map*/
