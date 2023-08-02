@@ -30,9 +30,20 @@
 		"ItemCatagory5":{
 			"type": "string",
 			"default":"click to edit text"
-		}
+		},
+		"myItems": {
+			"type": "object",
+			"default": {
+				"catagory1": ["Item 1", "Item 2", "Item 3"],
+				"catagory2": [],
+				"catagory3": [],
+				"catagory4": [],
+				"catagory5": []
+			  }
+		  }
+		
 
-
+		  
 	},
 	"textdomain": "fivemenu",
 	"editorScript": "file:./index.js",
