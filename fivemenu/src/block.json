@@ -34,7 +34,7 @@
 		"myItems": {
 			"type": "object",
 			"default": {
-				"catagory1": ["Item 1", "Item 2", "Item 3"],
+				"catagory1": [],
 				"catagory2": [],
 				"catagory3": [],
 				"catagory4": [],

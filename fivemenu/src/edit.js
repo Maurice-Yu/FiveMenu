@@ -58,8 +58,11 @@ export default function Edit({attributes,setAttributes}) {
     return (
       
         <RadioGroup label="Width" onChange={ setChecked } checked={ checked }>
-            <Radio value="catagory1">catagory1</Radio>
-            <Radio value="catagory2">catagory2</Radio>
+            <Radio value="catagory1">Catagory 1</Radio>
+            <Radio value="catagory2">Catagory 2</Radio>
+            <Radio value="catagory3">Catagory 3</Radio>
+            <Radio value="catagory4">Catagory 4</Radio>
+            <Radio value="catagory5">Catagory 5</Radio>
         </RadioGroup>
     );}
 
@@ -75,11 +78,46 @@ export default function Edit({attributes,setAttributes}) {
     {
       newMyItems.catagory2 = [...attributes.myItems.catagory2, newItem];
     }
+    if(checked==="catagory3")
+    {
+      newMyItems.catagory3 = [...attributes.myItems.catagory2, newItem];
+    }
+    if(checked==="catagory4")
+    {
+      newMyItems.catagory4 = [...attributes.myItems.catagory2, newItem];
+    }
+    if(checked==="catagory5")
+    {
+      newMyItems.catagory5 = [...attributes.myItems.catagory2, newItem];
+    }
     setAttributes({ myItems: newMyItems });
   };
 
   const removeLastItem = () => {
-    setAttributes({ catagory1: attributes.myItems.catagory1.slice(0, -1) });
+ 
+      let newMyItems = Object.assign({}, attributes.myItems);
+
+      if(checked==="catagory1")
+    {
+      newMyItems.catagory1 = newMyItems.catagory1.slice(0,-1);
+    }
+    if(checked==="catagory2")
+    {
+      newMyItems.catagory2 = newMyItems.catagory2.slice(0,-1);
+    }
+    if(checked==="catagory3")
+    {
+      newMyItems.catagory3 = newMyItems.catagory3.slice(0,-1);
+    }
+    if(checked==="catagory4")
+    {
+      newMyItems.catagory4 = newMyItems.catagory4.slice(0,-1);
+    }
+    if(checked==="catagory5")
+    {
+      newMyItems.catagory5 = newMyItems.catagory5.slice(0,-1);
+    }
+      setAttributes({myItems:newMyItems});
   };
 
 
@@ -91,18 +129,20 @@ export default function Edit({attributes,setAttributes}) {
       {/* <MyControlledRadioRadioGroup /> */}
       <MyControlledRadioRadioGroup />
         <Button onClick={addItem}>Add Item</Button>
-        {attributes.myItems.catagory1.length > 0 && (
+        {
           <Button onClick={removeLastItem}>Remove Last Item</Button>
-        )}
+        }
       </InspectorControls>
       
     </div>
+  {/* //to change style add inline style that takes a style={function to grab attribute style} */}
 
+//from '@wordpress/block-editor';
     <div>
     <h2>Menu</h2>
     <table className="menu-table">
       <tbody>
-        <tr>
+        <tr className="menu-category">
           <td colSpan="2">
             <strong>{ItemCatagory1}</strong>
             {attributes.myItems.catagory1.map((item, index) => (
@@ -143,9 +183,9 @@ export default function Edit({attributes,setAttributes}) {
                 <tr>
                   <td>
                     <ul>
-                      <li>Item X</li>
-                      <li>Item Y</li>
-                      <li>Item Z</li>
+                    {attributes.myItems.catagory3.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
                     </ul>
                   </td>
                 </tr>
@@ -159,15 +199,15 @@ export default function Edit({attributes,setAttributes}) {
               <tbody>
                 <tr>
                   <td>
-                    <strong>{ItemCatagory1}</strong>
+                    <strong>{ItemCatagory4}</strong>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <ul>
-                      <li>Item Alpha</li>
-                      <li>Item Beta</li>
-                      <li>Item Gamma</li>
+                    {attributes.myItems.catagory4.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
                     </ul>
                   </td>
                 </tr>
@@ -175,19 +215,19 @@ export default function Edit({attributes,setAttributes}) {
             </table>
           </td>
           <td>
-            <table className="menu-category">
+            <table className="menu-category" >
               <tbody>
                 <tr>
                   <td>
-                    <strong>Category 5</strong>
+                    <strong>click to edit text</strong>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <ul>
-                      <li>Item One</li>
-                      <li>Item Two</li>
-                      <li>Item Three</li>
+                    {attributes.myItems.catagory5.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
                     </ul>
                   </td>
                 </tr>
@@ -204,7 +244,6 @@ export default function Edit({attributes,setAttributes}) {
     initialOpen={true}
   >
     
-    sdfsdf
     
     <TextControl
     label={__("click to change item catagory 1", "fivemenu")}
@@ -239,7 +278,7 @@ export default function Edit({attributes,setAttributes}) {
     <PanelBody
     title={__('item catagory 1', 'fivemenu')}
     initialOpen={true}
->
+><div>
     {attributes.myItems.catagory1.map((item, index) => (
         <div key={index}>
             <InspectorControls>
@@ -256,10 +295,99 @@ export default function Edit({attributes,setAttributes}) {
         </InspectorControls>
         </div>
       ))}
+      </div>
     </PanelBody>
-
-
+    <PanelBody
+    title={__('item catagory 2', 'fivemenu')}
+    initialOpen={true}
+><div>
+    {attributes.myItems.catagory2.map((item, index) => (
+        <div key={index}>
+            <InspectorControls>
+ 
+ 
+          <TextControl
+            value={item}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory2[index] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+        </InspectorControls>
+        </div>
+      ))}
+      </div>
+    </PanelBody>
+    <PanelBody
+    title={__('item catagory 3', 'fivemenu')}
+    initialOpen={true}
+><div>
+    {attributes.myItems.catagory3.map((item, index) => (
+        <div key={index}>
+            <InspectorControls>
+ 
+ 
+          <TextControl
+            value={item}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory3[index] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+        </InspectorControls>
+        </div>
+      ))}
+      </div>
+    </PanelBody>
+    <PanelBody
+    title={__('item catagory 4', 'fivemenu')}
+    initialOpen={true}
+><div>
+    {attributes.myItems.catagory4.map((item, index) => (
+        <div key={index}>
+            <InspectorControls>
+ 
+ 
+          <TextControl
+            value={item}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory4[index] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+        </InspectorControls>
+        </div>
+      ))}
+      </div>
+    </PanelBody>
     
+    
+    <PanelBody
+    title={__('item catagory 5', 'fivemenu')}
+    initialOpen={true}
+><div>
+    {attributes.myItems.catagory4.map((item, index) => (
+        <div key={index}>
+            <InspectorControls>
+ 
+ 
+          <TextControl
+            value={item}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory5[index] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+        </InspectorControls>
+        </div>
+      ))}
+      </div>
+    </PanelBody>
+   
           
           
           
