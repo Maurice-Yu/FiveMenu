@@ -15,15 +15,120 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save(attributes) {
+export default function save({attributes}) {
 	console.log("hello world save");
-	
-	const {text} = attributes;
+	const {ItemCatagory1} = attributes;
+	const {ItemCatagory2} = attributes;
+	const {ItemCatagory3} = attributes;
+	const {ItemCatagory4} = attributes;
+	const {ItemCatagory5} = attributes;
 	return (
-	
-		<p { ...useBlockProps.save() }>
-			{ 'Fivemenu – hello from the saved content!' }
-		<h2>{text}</h2>
-		</p>
+	<fragment>
+		   <div>
+    <h2>Menu</h2>
+    <table className="menu-table">
+      <tbody>
+        <tr className="menu-category">
+          <td colSpan="2">
+            <strong>{ItemCatagory1}</strong>
+            {attributes.myItems.catagory1.map((item, index) => (
+      <li key={index}>{item[0]} {item[1]}</li>
+      
+    ))}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table className="menu-category">
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>{ItemCatagory2}</strong>
+                    {attributes.myItems.catagory2.map((item, index) => (
+      <li key={index}>{item[0]} {item[1]}</li>
+      
+    ))}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ul>
+                  
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table className="menu-category">
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>{ItemCatagory3}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ul>
+                    {attributes.myItems.catagory3.map((item, index) => (
+      <li key={index}>{item[0]} {item[1]}</li>
+      
+    ))}
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table className="menu-category" >
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>{ItemCatagory4}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ul>
+                    {attributes.myItems.catagory4.map((item, index) => (
+      <li key={index}>{item[0]} {item[1]}</li>
+      
+    ))}
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table className="menu-category" >
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>{ItemCatagory5}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ul>
+                    {attributes.myItems.catagory5.map((item, index) => (
+      <li key={index}>{item[0]} {item[1]}</li>
+      
+    ))}
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+		</fragment>
 	);
 }

@@ -6,42 +6,50 @@
  */
 
 .wp-block-create-block-fivemenu {
-	background-color: #21759b;
-	color: #fff;
+	background-color: #000000;
+	color: #000000;
 	padding: 2px;
 	
 }
 .menu-table {
 	width: 100%;
-	border-collapse: collapse;
-	border: 2px solid #000;
+	// border-collapse: collapse;
+	// border: 2px solid #000;
+  background-color: black;
   }
   
   /* Style for the category cells */
   .menu-category {
 	width: 100%;
-	border: 1px solid #000;
+	// border: 1px solid #000;
+  background-color: black;
+  color: gold;
   }
+  .menu-category {
+    width: 100%;
+    // border: 1px solid #000;
+    background-color: black;
+    color: gold;
+    }
   
   /* Style for the category names */
   .menu-category strong {
 	display: block;
 	text-align: center;
-	background-color: #f1f1f1;
+	background-color: black;
 	font-size: 1.2rem;
-	padding: 5px;
+	// padding: 5px;
+  color: gold;
   }
   
   /* Style for the unordered lists */
   .menu-category ul {
-	list-style: none;
-	padding: 0;
+
   }
   
   /* Style for the list items */
   .menu-category li {
-	font-size: 1rem;
-	padding: 5px;
+	
   }
   
   /* Additional custom styles for each section */

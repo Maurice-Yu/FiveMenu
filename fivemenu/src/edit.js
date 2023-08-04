@@ -66,9 +66,10 @@ export default function Edit({attributes,setAttributes}) {
         </RadioGroup>
     );}
 
+    
   const addItem = () => {
     
-    const newItem = 'New Item'; // Replace with your logic to get the new item value\
+    const newItem = ['New Item','0.00']; // Replace with your logic to get the new item value\
     let newMyItems = Object.assign({}, attributes.myItems);
     if(checked==="catagory1")
     {
@@ -80,15 +81,15 @@ export default function Edit({attributes,setAttributes}) {
     }
     if(checked==="catagory3")
     {
-      newMyItems.catagory3 = [...attributes.myItems.catagory2, newItem];
+      newMyItems.catagory3 = [...attributes.myItems.catagory3, newItem];
     }
     if(checked==="catagory4")
     {
-      newMyItems.catagory4 = [...attributes.myItems.catagory2, newItem];
+      newMyItems.catagory4 = [...attributes.myItems.catagory4, newItem];
     }
     if(checked==="catagory5")
     {
-      newMyItems.catagory5 = [...attributes.myItems.catagory2, newItem];
+      newMyItems.catagory5 = [...attributes.myItems.catagory5, newItem];
     }
     setAttributes({ myItems: newMyItems });
   };
@@ -146,7 +147,8 @@ export default function Edit({attributes,setAttributes}) {
           <td colSpan="2">
             <strong>{ItemCatagory1}</strong>
             {attributes.myItems.catagory1.map((item, index) => (
-      <li key={index}>{item}</li>
+      <li key={index}>{item[0]} {item[1]}</li>
+      
     ))}
           </td>
         </tr>
@@ -158,7 +160,8 @@ export default function Edit({attributes,setAttributes}) {
                   <td>
                     <strong>{ItemCatagory2}</strong>
                     {attributes.myItems.catagory2.map((item, index) => (
-      <li key={index}>{item}</li>
+      <li key={index}>{item[0]} {item[1]}</li>
+      
     ))}
                   </td>
                 </tr>
@@ -184,7 +187,8 @@ export default function Edit({attributes,setAttributes}) {
                   <td>
                     <ul>
                     {attributes.myItems.catagory3.map((item, index) => (
-      <li key={index}>{item}</li>
+      <li key={index}>{item[0]} {item[1]}</li>
+      
     ))}
                     </ul>
                   </td>
@@ -195,7 +199,7 @@ export default function Edit({attributes,setAttributes}) {
         </tr>
         <tr>
           <td>
-            <table className="menu-category">
+            <table className="menu-category" >
               <tbody>
                 <tr>
                   <td>
@@ -206,7 +210,8 @@ export default function Edit({attributes,setAttributes}) {
                   <td>
                     <ul>
                     {attributes.myItems.catagory4.map((item, index) => (
-      <li key={index}>{item}</li>
+      <li key={index}>{item[0]} {item[1]}</li>
+      
     ))}
                     </ul>
                   </td>
@@ -219,14 +224,15 @@ export default function Edit({attributes,setAttributes}) {
               <tbody>
                 <tr>
                   <td>
-                    <strong>click to edit text</strong>
+                    <strong>{ItemCatagory5}</strong>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <ul>
                     {attributes.myItems.catagory5.map((item, index) => (
-      <li key={index}>{item}</li>
+      <li key={index}>{item[0]} {item[1]}</li>
+      
     ))}
                     </ul>
                   </td>
@@ -275,126 +281,187 @@ export default function Edit({attributes,setAttributes}) {
     onChange={(newText) => setAttributes({ ItemCatagory5: newText })}
     >
     </TextControl>
+    </PanelBody>
+    </InspectorControls>
+    <InspectorControls>
     <PanelBody
-    title={__('item catagory 1', 'fivemenu')}
+    title={__('item catagory 1', 'item catagory 1')}
     initialOpen={true}
 ><div>
     {attributes.myItems.catagory1.map((item, index) => (
         <div key={index}>
-            <InspectorControls>
+            
  
  
           <TextControl
-            value={item}
+          label={__("item name ", "item catagory 1")}
+            value={item[0]}
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
-              updatedItems.catagory1[index] = newValue;
+              updatedItems.catagory1[index][0] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
-        </InspectorControls>
+           <TextControl
+           label={__("item price", "item catagory 1")}
+            value={item[1]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory1[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+        
+
         </div>
       ))}
       </div>
     </PanelBody>
+    </InspectorControls>
+    <InspectorControls>
     <PanelBody
     title={__('item catagory 2', 'fivemenu')}
     initialOpen={true}
 ><div>
     {attributes.myItems.catagory2.map((item, index) => (
         <div key={index}>
-            <InspectorControls>
+          
  
  
           <TextControl
-            value={item}
+          label={__("item name", "item catagory 2")}
+            value={item[0]}
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
-              updatedItems.catagory2[index] = newValue;
+              updatedItems.catagory2[index][0] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
-        </InspectorControls>
+           <TextControl
+           label={__("item price", "item catagory 2")}
+            value={item[1]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory2[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+   
         </div>
       ))}
       </div>
     </PanelBody>
+    </InspectorControls>
+    <InspectorControls>
     <PanelBody
     title={__('item catagory 3', 'fivemenu')}
     initialOpen={true}
 ><div>
     {attributes.myItems.catagory3.map((item, index) => (
         <div key={index}>
-            <InspectorControls>
+           
  
  
-          <TextControl
-            value={item}
+           <TextControl
+          label={__("item name", "item catagory 3")}
+            value={item[0]}
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
-              updatedItems.catagory3[index] = newValue;
+              updatedItems.catagory3[index][0] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
-        </InspectorControls>
+           <TextControl
+           label={__("item price", "item catagory 3")}
+            value={item[1]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory3[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+       
         </div>
       ))}
       </div>
     </PanelBody>
+    </InspectorControls>
+    <InspectorControls>
     <PanelBody
     title={__('item catagory 4', 'fivemenu')}
     initialOpen={true}
 ><div>
     {attributes.myItems.catagory4.map((item, index) => (
         <div key={index}>
-            <InspectorControls>
+           
  
  
-          <TextControl
-            value={item}
+           <TextControl
+          label={__("item name", "item catagory 4")}
+            value={item[0]}
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
-              updatedItems.catagory4[index] = newValue;
+              updatedItems.catagory4[index][0] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
-        </InspectorControls>
+           <TextControl
+           label={__("item price", "item catagory 4")}
+            value={item[1]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory4[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+     
         </div>
       ))}
       </div>
     </PanelBody>
-    
-    
+    </InspectorControls>
+    <InspectorControls>
     <PanelBody
     title={__('item catagory 5', 'fivemenu')}
     initialOpen={true}
 ><div>
-    {attributes.myItems.catagory4.map((item, index) => (
+    {attributes.myItems.catagory5.map((item, index) => (
         <div key={index}>
-            <InspectorControls>
+           
  
  
-          <TextControl
-            value={item}
+           <TextControl
+          label={__("item name", "item catagory 5")}
+            value={item[0]}
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
-              updatedItems.catagory5[index] = newValue;
+              updatedItems.catagory5[index][0] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
-        </InspectorControls>
+           <TextControl
+           label={__("item price", "item catagory 5")}
+            value={item[1]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory5[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+      
         </div>
       ))}
       </div>
     </PanelBody>
+    </InspectorControls>
    
           
           
           
-  </PanelBody>
+ 
 
 
-</InspectorControls>
+
     </Fragment>
   );
         
