@@ -35,17 +35,22 @@ const { InspectorControls } = wp.blockEditor;
 import { Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import {PanelBody,ColorPallette,TextControl} from '@wordpress/components';
+import { RichText } from '@wordpress/block-editor';
 // import { RadioGroup, Radio } from '@wordpress/components';
+import { MediaUpload } from '@wordpress/block-editor';
 import {
   __experimentalRadio as Radio,
   __experimentalRadioGroup as RadioGroup,
 } from '@wordpress/components';
 const {Fragment} = wp.element;
+import {AlignmentToolbar } from '@wordpress/block-editor';
 
-
+import { ColorPicker } from '@wordpress/components';
+import { SelectControl,RangeControl } from '@wordpress/components';
 export default function Edit({attributes,setAttributes}) {
 	console.log("hello world1");
-	
+	const [backgroundImage, setBackgroundImage] = useState(attributes.backgroundImage);
+
 	const {ItemCatagory1} = attributes;
 	const {ItemCatagory2} = attributes;
 	const {ItemCatagory3} = attributes;
@@ -54,7 +59,7 @@ export default function Edit({attributes,setAttributes}) {
 	console.log("hello world");
   const [ checked, setChecked ] = useState( 'catagory1' );
   const MyControlledRadioRadioGroup = () => {
-    
+
     return (
       
         <RadioGroup label="Width" onChange={ setChecked } checked={ checked }>
@@ -66,10 +71,23 @@ export default function Edit({attributes,setAttributes}) {
         </RadioGroup>
     );}
 
+    const handleStyleChange = (newStyle) => {
+      setAttributes({ blockStyle: newStyle });
+      
+    };
     
+    const handleColorChange = (newColor) => {
+      setAttributes({ backgroundColor: newColor });
+    };
+    const handleCatagoryColorChange = (newColor) => {
+      setAttributes({ catagoryColor: newColor });
+    };
+    const handleTextColorChange = (newColor) => {
+      setAttributes({ textColor: newColor });
+    };
   const addItem = () => {
     
-    const newItem = ['New Item','0.00']; // Replace with your logic to get the new item value\
+    const newItem = ['New Item','0.00','0.00']; // Replace with your logic to get the new item value\
     let newMyItems = Object.assign({}, attributes.myItems);
     if(checked==="catagory1")
     {
@@ -121,12 +139,141 @@ export default function Edit({attributes,setAttributes}) {
       setAttributes({myItems:newMyItems});
   };
 
+  const listStyle = {
+    listStyleType: 'none', // Remove default list item marker
+    padding: 0, // Remove default padding
+    margin: 0, // Remove default margin
+  };
+  const imageStyle = {
+    backgroundImage: attributes.backgroundImage ? `url(${attributes.backgroundImage})` : 'none',
+    backgroundSize: 'cover',
+    width: '25%', // Adjust the width of the image as needed
+    height: '25%', // Adjust the height of the image as needed
+  };
+ 
+  const styles = {
+    // ... (your styles for different blockStyle values)
+  };
 
+  const selectedStyle = styles[attributes.blockStyle] || {};
+
+  const blockStyle = {
+    ...selectedStyle,
+    backgroundColor: attributes.backgroundColor, // Apply the selected background color
+    color: attributes.textColor,
+    fontFamily: attributes.fontFamily,
+    textAlign: attributes.alignment,
+    fontSize: attributes.fontSize,
+    // tableLayout: "fixed",
+    width:"100%"
+  };
+  const handleFontSizeChange = (newFontSize) => {
+    setAttributes({ fontSize: newFontSize });
+  };
+  const handleAlignmentChange = (newAlignment) => {
+    setAttributes({ alignment: newAlignment });
+  };
+  const handleFontChange = (newFont) => {
+    setAttributes({ fontFamily: newFont });
+  };
+  const handleImageSizeChange = (newSize) => {
+    setAttributes({ imageSize: newSize });
+  };
+  const popularFonts = [
+    'Arial, sans-serif',
+    'Times New Roman, serif',
+    'Helvetica, sans-serif',
+    'Verdana, sans-serif',
+    'Tahoma, sans-serif',
+  'Courier New, monospace',
+  'Georgia, serif',
+  'Palatino Linotype, serif',
+  'Lucida Sans Unicode, sans-serif',
+  'Trebuchet MS, sans-serif',
+  'Arial Black, sans-serif',
+  'Impact, sans-serif',
+  'Comic Sans MS, cursive',
+  'Garamond, serif',
+  'Webdings, sans-serif',
+  'Wingdings, sans-serif',
+  'Symbol, sans-serif',
+  'Lucida Console, monospace',
+  'MS Sans Serif, sans-serif',
+  'MS Serif, serif',
+
+  ];
+  const catagoryColor = {
+    color: attributes.catagoryColor,
+  };
+  const imageStyleCatagory1 = {
+  
+    backgroundSize: 'cover',
+        width: `${attributes.imageSize}%`, // Adjust the width of the image as needed
+        height: 'auto', // Adjust the height of the image as needed
+        display: 'block',
+        margin: '0 auto',
+     
+      };
   return (
     <Fragment>
      <div>
       
       <InspectorControls>
+      <RangeControl
+        label="Image Size"
+        value={attributes.imageSize}
+        onChange={handleImageSizeChange}
+        min={10}
+        max={100}
+        step={1}
+      />
+      <RangeControl
+          label="Font Size"
+          value={attributes.fontSize}
+          onChange={handleFontSizeChange}
+          min={12}
+          max={60}
+          step={1}
+        />
+      <AlignmentToolbar
+          value={attributes.alignment}
+          onChange={handleAlignmentChange}
+        />
+      <MediaUpload
+          onSelect={(media) => {
+            setBackgroundImage(media.url);
+            setAttributes({ backgroundImage: media.url });
+          }}
+          type="image"
+          value={backgroundImage}
+          render={({ open }) => (
+            <Button onClick={open}>
+              {backgroundImage ? 'Change Image' : 'Upload Image'}
+            </Button>
+          )}
+        />
+         <ColorPicker
+          label="Background Color"
+          color={attributes.backgroundColor}
+          onChangeComplete={(value) => handleColorChange(value.hex)}
+        />
+         <ColorPicker
+          label="text Color"
+          color={attributes.textColor}
+          onChangeComplete={(value) => handleTextColorChange(value.hex)}
+        />
+          <ColorPicker
+          label="catagory Color"
+          color={attributes.catagoryColor}
+          onChangeComplete={(value) => handleCatagoryColorChange(value.hex)}
+        />
+        
+        <SelectControl
+          label="Font Family"
+          value={attributes.fontFamily}
+          options={popularFonts.map((font) => ({ value: font, label: font }))}
+          onChange={handleFontChange}
+        />
       {/* <MyControlledRadioRadioGroup /> */}
       <MyControlledRadioRadioGroup />
         <Button onClick={addItem}>Add Item</Button>
@@ -138,112 +285,373 @@ export default function Edit({attributes,setAttributes}) {
     </div>
   {/* //to change style add inline style that takes a style={function to grab attribute style} */}
 
-//from '@wordpress/block-editor';
-    <div>
-    <h2>Menu</h2>
-    <table className="menu-table">
-      <tbody>
-        <tr className="menu-category">
-          <td colSpan="2">
-            <strong>{ItemCatagory1}</strong>
+{/* 
+<div>
+  <h2>Menu</h2>
+  <table className="menu-table" style={blockStyle}>
+    <tbody>
+      <tr className="menu-category">
+        <td colSpan="2" style={{ textAlign: 'center' }}>
+          <img
+            src={attributes.backgroundImage}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          <strong style={catagoryColor}>{ItemCatagory1}</strong>
+          <ul style={listStyle}>
+        {attributes.myItems.catagory1.map((item, index) => (
+          <li key={index}>
+           
+            <RichText
+              tagName="span"
+              value={item[0]}
+              onChange={(newItem) => {
+                const updatedItems = [...attributes.myItems.catagory1];
+                updatedItems[index][0] = newItem;
+                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Menu Item"
+            />
+            {' '}
+          
+            <RichText
+              tagName="span"
+              value={item[1]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory1];
+                updatedItems[index][1] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price"
+            />
+               <RichText
+              tagName="span"
+              value={item[2]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory1];
+                updatedItems[index][2] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price 2"
+            />
+          </li>
+        ))}
+      </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table className="menu-category">
+            <tbody>
+              <tr>
+                <td>
+                  <strong style={catagoryColor}>{ItemCatagory2}</strong>
+                  <ul style={listStyle}>
+        {attributes.myItems.catagory2.map((item, index) => (
+          <li key={index}>
+           
+            <RichText
+              tagName="span"
+              value={item[0]}
+              onChange={(newItem) => {
+                const updatedItems = [...attributes.myItems.catagory2];
+                updatedItems[index][0] = newItem;
+                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Menu Item"
+            />
+            {' '}
+        
+            <RichText
+              tagName="span"
+              value={item[1]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory2];
+                updatedItems[index][1] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price"
+            />
+            <RichText
+              tagName="span"
+              value={item[2]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory2];
+                updatedItems[index][2] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price 2"
+            />
+          </li>
+        ))}
+      </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table className="menu-category">
+            <tbody>
+              <tr>
+                <td>
+                  <strong style={catagoryColor}>{ItemCatagory3}</strong>
+                  <ul style={listStyle}>
+        {attributes.myItems.catagory3.map((item, index) => (
+          <li key={index}>
+           
+            <RichText
+              tagName="span"
+              value={item[0]}
+              onChange={(newItem) => {
+                const updatedItems = [...attributes.myItems.catagory3];
+                updatedItems[index][0] = newItem;
+                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Menu Item"
+            />
+            {' '}
+         
+            <RichText
+              tagName="span"
+              value={item[1]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory3];
+                updatedItems[index][1] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price"
+            />
+            <RichText
+              tagName="span"
+              value={item[2]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory3];
+                updatedItems[index][2] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price 2"
+            />
+          </li>
+        ))}
+      </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table className="menu-category">
+            <tbody>
+              <tr>
+                <td>
+                  <strong style={catagoryColor}>{ItemCatagory4}</strong>
+                  <ul style={listStyle}>
+        {attributes.myItems.catagory4.map((item, index) => (
+          <li key={index}>
+        
+            <RichText
+              tagName="span"
+              value={item[0]}
+              onChange={(newItem) => {
+                const updatedItems = [...attributes.myItems.catagory4];
+                updatedItems[index][0] = newItem;
+                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Menu Item"
+            />
+            {' '}
+        
+            <RichText
+              tagName="span"
+              value={item[1]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory4];
+                updatedItems[index][1] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price"
+            />
+            <RichText
+              tagName="span"
+              value={item[2]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory4];
+                updatedItems[index][2] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price 2"
+            />
+          </li>
+        ))}
+      </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table className="menu-category">
+            <tbody>
+              <tr>
+                <td>
+                  <strong style={catagoryColor}>{ItemCatagory5}</strong>
+                  <ul style={listStyle}>
+        {attributes.myItems.catagory5.map((item, index) => (
+          <li key={index}>
+         
+            <RichText
+              tagName="span"
+              value={item[0]}
+              onChange={(newItem) => {
+                const updatedItems = [...attributes.myItems.catagory5];
+                updatedItems[index][0] = newItem;
+                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Menu Item"
+            />
+            {' '}
+           
+            <RichText
+              tagName="span"
+              value={item[1]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory5];
+                updatedItems[index][1] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price"
+            />
+               <RichText
+              tagName="span"
+              value={item[2]}
+              onChange={(newPrice) => {
+                const updatedItems = [...attributes.myItems.catagory5];
+                updatedItems[index][2] = newPrice;
+                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
+              }}
+              formattingControls={[]}
+              placeholder="Price 2"
+            />
+          </li>
+        ))}
+      </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> */}
+<div className="scrollwrapper">
+  <h2>Menu</h2>
+  <div className="menuContainer">
+  <table className="menu-table"  style={blockStyle}>
+    <tbody>
+      <tr className="menu-category">
+        <td colSpan="2" style={{ textAlign: 'center' }}>
+          <img
+            src={attributes.backgroundImage}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          <strong style={catagoryColor}>{ItemCatagory1}</strong>
+          </td>
+          </tr>
+          <tr>
+            <td colSpan="2" align="center">
+            <table align="center">
             {attributes.myItems.catagory1.map((item, index) => (
-      <li key={index}>{item[0]} {item[1]}</li>
-      
-    ))}
+              <tr key={index}>
+                <td>{item[0]}</td> <td>{item[1]}</td> <td>{item[2]}</td>
+              </tr>
+            ))}
+            </table>
           </td>
-        </tr>
-        <tr>
-          <td>
-            <table className="menu-category">
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>{ItemCatagory2}</strong>
+          </tr>
+        
+      <tr>
+        <td width="50%">
+          <table className="menu-category"  >
+            <tbody>
+
+
+                  <strong style={catagoryColor}>{ItemCatagory2}</strong>
+
                     {attributes.myItems.catagory2.map((item, index) => (
-      <li key={index}>{item[0]} {item[1]}</li>
-      
-    ))}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
-                  
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table className="menu-category">
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>{ItemCatagory3}</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
+                      <tr key={index}>
+                        <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
+                      </tr>
+                    ))}
+ 
+    
+     
+            </tbody>
+          </table>
+        </td>
+        <td width="50%">
+        <table className="menu-category">
+            <tbody>
+                  <strong style={catagoryColor}>{ItemCatagory3}</strong>
                     {attributes.myItems.catagory3.map((item, index) => (
-      <li key={index}>{item[0]} {item[1]}</li>
-      
-    ))}
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <table className="menu-category" >
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>{ItemCatagory4}</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
+                      <tr key={index}>
+                        <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
+                      </tr>
+                    ))}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%">
+        <table className="menu-category">
+            <tbody>
+                  <strong style={catagoryColor}>{ItemCatagory4}</strong>
+
                     {attributes.myItems.catagory4.map((item, index) => (
-      <li key={index}>{item[0]} {item[1]}</li>
-      
-    ))}
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table className="menu-category" >
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>{ItemCatagory5}</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ul>
+                      <tr key={index}>
+                        <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
+                      </tr>
+                    ))}
+            </tbody>
+          </table>
+        </td>
+        <td width="50%">
+        <table className="menu-category">
+            <tbody>
+                  <strong style={catagoryColor}>{ItemCatagory5}</strong>
+
                     {attributes.myItems.catagory5.map((item, index) => (
-      <li key={index}>{item[0]} {item[1]}</li>
-      
-    ))}
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                      <tr key={index}>
+                        <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
+                      </tr>
+                    ))}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   </div>
+</div>
   <InspectorControls>
   <PanelBody
     title={__('Panel Title', 'fivemenu')}
@@ -311,6 +719,15 @@ export default function Edit({attributes,setAttributes}) {
               setAttributes({ myItems: updatedItems });
             }}
           />
+            <TextControl
+           label={__("item price 2", "item catagory 1")}
+            value={item[2]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory1[index][2] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
         
 
         </div>
@@ -346,7 +763,15 @@ export default function Edit({attributes,setAttributes}) {
               setAttributes({ myItems: updatedItems });
             }}
           />
-   
+     <TextControl
+           label={__("item price 2", "item catagory 2")}
+            value={item[2]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory2[index][2] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
         </div>
       ))}
       </div>
@@ -380,7 +805,15 @@ export default function Edit({attributes,setAttributes}) {
               setAttributes({ myItems: updatedItems });
             }}
           />
-       
+          <TextControl
+           label={__("item price 2", "item catagory 3")}
+            value={item[2]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory3[index][2] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
         </div>
       ))}
       </div>
@@ -411,6 +844,15 @@ export default function Edit({attributes,setAttributes}) {
             onChange={(newValue) => {
               let updatedItems = Object.assign({}, attributes.myItems);
               updatedItems.catagory4[index][1] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
+            <TextControl
+           label={__("item price 2", "item catagory 4")}
+            value={item[2]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory4[index][2] = newValue;
               setAttributes({ myItems: updatedItems });
             }}
           />
@@ -448,7 +890,15 @@ export default function Edit({attributes,setAttributes}) {
               setAttributes({ myItems: updatedItems });
             }}
           />
-      
+      <TextControl
+           label={__("item price 2", "item catagory 5")}
+            value={item[2]}
+            onChange={(newValue) => {
+              let updatedItems = Object.assign({}, attributes.myItems);
+              updatedItems.catagory5[index][2] = newValue;
+              setAttributes({ myItems: updatedItems });
+            }}
+          />
         </div>
       ))}
       </div>

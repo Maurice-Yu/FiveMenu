@@ -11,6 +11,30 @@
     "html": false
   },
   "attributes": {
+    "fontFamily": {
+      "type": "string",
+      "default": "Arial, sans-serif"
+    },
+    "blockStyle": {
+      "type": "string",
+      "default": "style1"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#0"
+    },
+    "catagoryColor": {
+      "type": "string",
+      "default": "#0"
+    },
+    "backgroundImage": {
+      "type": "string",
+      "default": ""
+    },
     "ItemCatagory1": {
       "type": "string",
       "default": "click to edit text"
@@ -40,6 +64,18 @@
         "catagory4": [],
         "catagory5": []
       }
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "fontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "imageSize": {
+      "type": "number",
+      "default": 50
     }
   },
   "textdomain": "fivemenu",
