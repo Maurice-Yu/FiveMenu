@@ -16,9 +16,29 @@
   overflow-x: auto; /* Allow horizontal scrolling for each container */
   white-space: nowrap;
 }
- .scrollwrapper {
-  overflow-x: auto;
-    white-space: nowrap;
+
+.scrollwrapper {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of content */
+  scrollbar-width: thin; /* Set scrollbar width (for Firefox) */
+  scrollbar-color: rgb(77, 70, 70) rgb(44, 43, 43); /* Set scrollbar colors (for Firefox) */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+
+  /* Adjust the scrollbar appearance for webkit browsers (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: gray; /* Thumb color */
+    &:hover {
+      background-color: darkgray; /* Thumb color on hover */
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: lightgray; /* Track color */
+  }
 }
 .wp-block-create-block-fivemenu {
 	background-color: #ffffff;
@@ -48,12 +68,6 @@
   }
 
   /* Style for the category names */
-  .menu-category strong {
-	display: block;
-	// background-color: black;
-	font-size: 1.2rem;
-	// padding: 5px;
-  // color: gold;
-  }
+  
   
 

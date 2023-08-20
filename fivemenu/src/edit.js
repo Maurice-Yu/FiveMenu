@@ -50,7 +50,10 @@ import { SelectControl,RangeControl } from '@wordpress/components';
 export default function Edit({attributes,setAttributes}) {
 	console.log("hello world1");
 	const [backgroundImage, setBackgroundImage] = useState(attributes.backgroundImage);
-
+	const [backgroundImage2, setBackgroundImage2] = useState(attributes.backgroundImage2);
+  const [backgroundImage3, setBackgroundImage3] = useState(attributes.backgroundImage3);
+  const [backgroundImage4, setBackgroundImage4] = useState(attributes.backgroundImage4);
+  const [backgroundImage5, setBackgroundImage5] = useState(attributes.backgroundImage5);
 	const {ItemCatagory1} = attributes;
 	const {ItemCatagory2} = attributes;
 	const {ItemCatagory3} = attributes;
@@ -179,6 +182,18 @@ export default function Edit({attributes,setAttributes}) {
   const handleImageSizeChange = (newSize) => {
     setAttributes({ imageSize: newSize });
   };
+  const handleSmallImageSizeChange = (newSize) => {
+    setAttributes({ imageSizeSmall: newSize });
+  };
+  const imageStyleCatagory0 = {
+  
+    backgroundSize: 'cover',
+        width: `${attributes.imageSize}%`, // Adjust the width of the image as needed
+        height: 'auto', // Adjust the height of the image as needed
+        display: 'block',
+        margin: '0 auto',
+     
+      };
   const popularFonts = [
     'Arial, sans-serif',
     'Times New Roman, serif',
@@ -208,7 +223,7 @@ export default function Edit({attributes,setAttributes}) {
   const imageStyleCatagory1 = {
   
     backgroundSize: 'cover',
-        width: `${attributes.imageSize}%`, // Adjust the width of the image as needed
+        width: `${attributes.imageSizeSmall}%`, // Adjust the width of the image as needed
         height: 'auto', // Adjust the height of the image as needed
         display: 'block',
         margin: '0 auto',
@@ -225,6 +240,14 @@ export default function Edit({attributes,setAttributes}) {
         onChange={handleImageSizeChange}
         min={10}
         max={100}
+        step={1}
+      />
+       <RangeControl
+        label="Image Size for catagories"
+        value={attributes.imageSizeSmall}
+        onChange={handleSmallImageSizeChange}
+        min={10}
+        max={200}
         step={1}
       />
       <RangeControl
@@ -249,6 +272,58 @@ export default function Edit({attributes,setAttributes}) {
           render={({ open }) => (
             <Button onClick={open}>
               {backgroundImage ? 'Change Image' : 'Upload Image'}
+            </Button>
+          )}
+        />
+          <MediaUpload
+          onSelect={(media) => {
+            setBackgroundImage(media.url);
+            setAttributes({ backgroundImage2: media.url });
+          }}
+          type="image"
+          value={backgroundImage2}
+          render={({ open }) => (
+            <Button onClick={open}>
+              {backgroundImage2 ? 'Change Image Catagory 2' : 'Upload Image Catagory 2'}
+            </Button>
+          )}
+        />
+             <MediaUpload
+          onSelect={(media) => {
+            setBackgroundImage(media.url);
+            setAttributes({ backgroundImage3: media.url });
+          }}
+          type="image"
+          value={backgroundImage3}
+          render={({ open }) => (
+            <Button onClick={open}>
+              {backgroundImage3 ? 'Change Image Catagory 3' : 'Upload Image Catagory 3'}
+            </Button>
+          )}
+        />
+             <MediaUpload
+          onSelect={(media) => {
+            setBackgroundImage(media.url);
+            setAttributes({ backgroundImage4: media.url });
+          }}
+          type="image"
+          value={backgroundImage4}
+          render={({ open }) => (
+            <Button onClick={open}>
+              {backgroundImage4 ? 'Change Image Catagory 4' : 'Upload Image Catagory 4'}
+            </Button>
+          )}
+        />
+             <MediaUpload
+          onSelect={(media) => {
+            setBackgroundImage(media.url);
+            setAttributes({ backgroundImage5: media.url });
+          }}
+          type="image"
+          value={backgroundImage5}
+          render={({ open }) => (
+            <Button onClick={open}>
+              {backgroundImage5 ? 'Change Image Catagory 5' : 'Upload Image Catagory 5'}
             </Button>
           )}
         />
@@ -571,7 +646,7 @@ export default function Edit({attributes,setAttributes}) {
           <img
             src={attributes.backgroundImage}
             alt="Image"
-            style={imageStyleCatagory1}
+            style={imageStyleCatagory0}
           />
           <strong style={catagoryColor}>{ItemCatagory1}</strong>
           </td>
@@ -588,13 +663,19 @@ export default function Edit({attributes,setAttributes}) {
           </td>
           </tr>
         
-      <tr>
-        <td width="50%">
+      <tr >
+        <td width="50%" >
           <table className="menu-category"  >
             <tbody>
 
 
-                  <strong style={catagoryColor}>{ItemCatagory2}</strong>
+            <tr><td> <strong style={catagoryColor}>{ItemCatagory2}</strong></td><td>  
+              <img
+            src={attributes.backgroundImage2}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory2.map((item, index) => (
                       <tr key={index}>
@@ -607,10 +688,16 @@ export default function Edit({attributes,setAttributes}) {
             </tbody>
           </table>
         </td>
-        <td width="50%">
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory3}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory3}</strong></td><td>
+              <img
+            src={attributes.backgroundImage3}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
                     {attributes.myItems.catagory3.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
@@ -620,11 +707,17 @@ export default function Edit({attributes,setAttributes}) {
           </table>
         </td>
       </tr>
-      <tr>
-        <td width="50%">
+      <tr >
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory4}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory4}</strong></td><td>
+            <img
+            src={attributes.backgroundImage4}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory4.map((item, index) => (
                       <tr key={index}>
@@ -634,10 +727,16 @@ export default function Edit({attributes,setAttributes}) {
             </tbody>
           </table>
         </td>
-        <td width="50%">
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory5}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory5}</strong></td><td>
+            <img
+            src={attributes.backgroundImage5}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory5.map((item, index) => (
                       <tr key={index}>

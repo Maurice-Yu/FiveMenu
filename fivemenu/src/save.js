@@ -33,12 +33,21 @@ const imageStyle = {
   const imageStyleCatagory1 = {
   
     backgroundSize: 'cover',
-        width: `${attributes.imageSize}%`, // Adjust the width of the image as needed
+        width: `${attributes.imageSizeSmall}%`, // Adjust the width of the image as needed
         height: 'auto', // Adjust the height of the image as needed
         display: 'block',
         margin: '0 auto',
      
       };
+      const imageStyleCatagory0 = {
+  
+        backgroundSize: 'cover',
+            width: `${attributes.imageSize}%`, // Adjust the width of the image as needed
+            height: 'auto', // Adjust the height of the image as needed
+            display: 'block',
+            margin: '0 auto',
+         
+          };
   const styles = {
     // ... (your styles for different blockStyle values)
   };
@@ -65,7 +74,7 @@ const imageStyle = {
   };
 	return (
 	<fragment>
-    <div className="scrollwrapper">
+   <div className="scrollwrapper">
   <h2>Menu</h2>
   <div className="menuContainer">
   <table className="menu-table"  style={blockStyle}>
@@ -75,7 +84,7 @@ const imageStyle = {
           <img
             src={attributes.backgroundImage}
             alt="Image"
-            style={imageStyleCatagory1}
+            style={imageStyleCatagory0}
           />
           <strong style={catagoryColor}>{ItemCatagory1}</strong>
           </td>
@@ -92,13 +101,19 @@ const imageStyle = {
           </td>
           </tr>
         
-      <tr style="vertical-align=top;">
-        <td width="50%" style="vertical-align=top;">
+      <tr >
+        <td width="50%" >
           <table className="menu-category"  >
             <tbody>
 
 
-                  <strong style={catagoryColor}>{ItemCatagory2}</strong>
+            <tr><td> <strong style={catagoryColor}>{ItemCatagory2}</strong></td><td>  
+              <img
+            src={attributes.backgroundImage2}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory2.map((item, index) => (
                       <tr key={index}>
@@ -111,10 +126,16 @@ const imageStyle = {
             </tbody>
           </table>
         </td>
-        <td width="50%" style="vertical-align=top;">
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory3}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory3}</strong></td><td>
+              <img
+            src={attributes.backgroundImage3}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
                     {attributes.myItems.catagory3.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
@@ -124,11 +145,17 @@ const imageStyle = {
           </table>
         </td>
       </tr>
-      <tr style="vertical-align=top;">
-        <td width="50%" style="vertical-align=top;">
+      <tr >
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory4}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory4}</strong></td><td>
+            <img
+            src={attributes.backgroundImage4}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory4.map((item, index) => (
                       <tr key={index}>
@@ -138,10 +165,16 @@ const imageStyle = {
             </tbody>
           </table>
         </td>
-        <td width="50%" style="vertical-align=top;">
+        <td width="50%" >
         <table className="menu-category">
             <tbody>
-                  <strong style={catagoryColor}>{ItemCatagory5}</strong>
+            <tr><td><strong style={catagoryColor}>{ItemCatagory5}</strong></td><td>
+            <img
+            src={attributes.backgroundImage5}
+            alt="Image"
+            style={imageStyleCatagory1}
+          />
+          </td></tr>
 
                     {attributes.myItems.catagory5.map((item, index) => (
                       <tr key={index}>
