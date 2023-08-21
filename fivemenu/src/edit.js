@@ -168,7 +168,9 @@ export default function Edit({attributes,setAttributes}) {
     textAlign: attributes.alignment,
     fontSize: attributes.fontSize,
     // tableLayout: "fixed",
-    width:"100%"
+    width:"100%",
+    paddingLeft:"15%",
+    paddingRight:"15%"
   };
   const handleFontSizeChange = (newFontSize) => {
     setAttributes({ fontSize: newFontSize });
@@ -230,7 +232,7 @@ export default function Edit({attributes,setAttributes}) {
      
       };
   return (
-    <Fragment>
+    <Fragment> 
      <div>
       
       <InspectorControls>
@@ -360,329 +362,34 @@ export default function Edit({attributes,setAttributes}) {
     </div>
   {/* //to change style add inline style that takes a style={function to grab attribute style} */}
 
-{/* 
-<div>
-  <h2>Menu</h2>
-  <table className="menu-table" style={blockStyle}>
-    <tbody>
-      <tr className="menu-category">
-        <td colSpan="2" style={{ textAlign: 'center' }}>
-          <img
-            src={attributes.backgroundImage}
-            alt="Image"
-            style={imageStyleCatagory1}
-          />
-          <strong style={catagoryColor}>{ItemCatagory1}</strong>
-          <ul style={listStyle}>
-        {attributes.myItems.catagory1.map((item, index) => (
-          <li key={index}>
-           
-            <RichText
-              tagName="span"
-              value={item[0]}
-              onChange={(newItem) => {
-                const updatedItems = [...attributes.myItems.catagory1];
-                updatedItems[index][0] = newItem;
-                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Menu Item"
-            />
-            {' '}
-          
-            <RichText
-              tagName="span"
-              value={item[1]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory1];
-                updatedItems[index][1] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price"
-            />
-               <RichText
-              tagName="span"
-              value={item[2]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory1];
-                updatedItems[index][2] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory1: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price 2"
-            />
-          </li>
-        ))}
-      </ul>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table className="menu-category">
-            <tbody>
-              <tr>
-                <td>
-                  <strong style={catagoryColor}>{ItemCatagory2}</strong>
-                  <ul style={listStyle}>
-        {attributes.myItems.catagory2.map((item, index) => (
-          <li key={index}>
-           
-            <RichText
-              tagName="span"
-              value={item[0]}
-              onChange={(newItem) => {
-                const updatedItems = [...attributes.myItems.catagory2];
-                updatedItems[index][0] = newItem;
-                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Menu Item"
-            />
-            {' '}
-        
-            <RichText
-              tagName="span"
-              value={item[1]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory2];
-                updatedItems[index][1] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price"
-            />
-            <RichText
-              tagName="span"
-              value={item[2]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory2];
-                updatedItems[index][2] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory2: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price 2"
-            />
-          </li>
-        ))}
-      </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-        <td>
-          <table className="menu-category">
-            <tbody>
-              <tr>
-                <td>
-                  <strong style={catagoryColor}>{ItemCatagory3}</strong>
-                  <ul style={listStyle}>
-        {attributes.myItems.catagory3.map((item, index) => (
-          <li key={index}>
-           
-            <RichText
-              tagName="span"
-              value={item[0]}
-              onChange={(newItem) => {
-                const updatedItems = [...attributes.myItems.catagory3];
-                updatedItems[index][0] = newItem;
-                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Menu Item"
-            />
-            {' '}
-         
-            <RichText
-              tagName="span"
-              value={item[1]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory3];
-                updatedItems[index][1] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price"
-            />
-            <RichText
-              tagName="span"
-              value={item[2]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory3];
-                updatedItems[index][2] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory3: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price 2"
-            />
-          </li>
-        ))}
-      </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table className="menu-category">
-            <tbody>
-              <tr>
-                <td>
-                  <strong style={catagoryColor}>{ItemCatagory4}</strong>
-                  <ul style={listStyle}>
-        {attributes.myItems.catagory4.map((item, index) => (
-          <li key={index}>
-        
-            <RichText
-              tagName="span"
-              value={item[0]}
-              onChange={(newItem) => {
-                const updatedItems = [...attributes.myItems.catagory4];
-                updatedItems[index][0] = newItem;
-                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Menu Item"
-            />
-            {' '}
-        
-            <RichText
-              tagName="span"
-              value={item[1]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory4];
-                updatedItems[index][1] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price"
-            />
-            <RichText
-              tagName="span"
-              value={item[2]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory4];
-                updatedItems[index][2] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory4: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price 2"
-            />
-          </li>
-        ))}
-      </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-        <td>
-          <table className="menu-category">
-            <tbody>
-              <tr>
-                <td>
-                  <strong style={catagoryColor}>{ItemCatagory5}</strong>
-                  <ul style={listStyle}>
-        {attributes.myItems.catagory5.map((item, index) => (
-          <li key={index}>
-         
-            <RichText
-              tagName="span"
-              value={item[0]}
-              onChange={(newItem) => {
-                const updatedItems = [...attributes.myItems.catagory5];
-                updatedItems[index][0] = newItem;
-                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Menu Item"
-            />
-            {' '}
-           
-            <RichText
-              tagName="span"
-              value={item[1]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory5];
-                updatedItems[index][1] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price"
-            />
-               <RichText
-              tagName="span"
-              value={item[2]}
-              onChange={(newPrice) => {
-                const updatedItems = [...attributes.myItems.catagory5];
-                updatedItems[index][2] = newPrice;
-                setAttributes({ myItems: { ...attributes.myItems, catagory5: updatedItems } });
-              }}
-              formattingControls={[]}
-              placeholder="Price 2"
-            />
-          </li>
-        ))}
-      </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> */}
+
 <div className="scrollwrapper">
-  <h2>Menu</h2>
+  <h2 style={{ textAlign: 'center' }}>Menu</h2>
   <div className="menuContainer">
   <table className="menu-table"  style={blockStyle}>
     <tbody>
-      <tr className="menu-category">
-        <td colSpan="2" style={{ textAlign: 'center' }}>
-          <img
-            src={attributes.backgroundImage}
-            alt="Image"
-            style={imageStyleCatagory0}
-          />
-          <strong style={catagoryColor}>{ItemCatagory1}</strong>
-          </td>
-          </tr>
-          <tr>
-            <td colSpan="2" align="center">
-            <table align="center">
-            {attributes.myItems.catagory1.map((item, index) => (
-              <tr key={index}>
-                <td>{item[0]}</td> <td>{item[1]}</td> <td>{item[2]}</td>
-              </tr>
-            ))}
-            </table>
-          </td>
-          </tr>
+ 
         
-      <tr >
+      <tr className="menu-category">
         <td width="50%" >
           <table className="menu-category"  >
             <tbody>
 
 
             <tr><td> <strong style={catagoryColor}>{ItemCatagory2}</strong></td><td>  
-              <img
+              {/* <img  
             src={attributes.backgroundImage2}
             alt="Image"
             style={imageStyleCatagory1}
-          />
+          /> */}
           </td></tr>
-
+          <tr >
                     {attributes.myItems.catagory2.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
                       </tr>
                     ))}
- 
+ </tr>
     
      
             </tbody>
@@ -692,38 +399,41 @@ export default function Edit({attributes,setAttributes}) {
         <table className="menu-category">
             <tbody>
             <tr><td><strong style={catagoryColor}>{ItemCatagory3}</strong></td><td>
-              <img
+              {/* <img
             src={attributes.backgroundImage3}
             alt="Image"
             style={imageStyleCatagory1}
-          />
+          /> */}
           </td></tr>
+          <tr>
                     {attributes.myItems.catagory3.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
                       </tr>
                     ))}
+            </tr>
             </tbody>
           </table>
         </td>
       </tr>
-      <tr >
+      <tr  className="menu-category">
         <td width="50%" >
         <table className="menu-category">
             <tbody>
             <tr><td><strong style={catagoryColor}>{ItemCatagory4}</strong></td><td>
-            <img
+            {/* <img
             src={attributes.backgroundImage4}
             alt="Image"
             style={imageStyleCatagory1}
-          />
+          /> */}
           </td></tr>
-
+          <tr>
                     {attributes.myItems.catagory4.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
                       </tr>
                     ))}
+                    </tr>
             </tbody>
           </table>
         </td>
@@ -731,22 +441,44 @@ export default function Edit({attributes,setAttributes}) {
         <table className="menu-category">
             <tbody>
             <tr><td><strong style={catagoryColor}>{ItemCatagory5}</strong></td><td>
-            <img
+            {/* <img
             src={attributes.backgroundImage5}
             alt="Image"
             style={imageStyleCatagory1}
-          />
+          /> */}
           </td></tr>
-
+          <tr>
                     {attributes.myItems.catagory5.map((item, index) => (
                       <tr key={index}>
                         <td>{item[0]}</td> <td width="15%">{item[1]}</td><td width="15%">{item[2]}</td>
                       </tr>
                     ))}
+                    </tr>
             </tbody>
           </table>
         </td>
       </tr>
+      <tr className="menu-category" >
+        <td colSpan="2" style={{ textAlign: 'center' }}>
+          {/* <img
+            src={attributes.backgroundImage}
+            alt="Image"
+            style={imageStyleCatagory0}
+          /> */}
+          <strong style={catagoryColor}>{ItemCatagory1}</strong>
+          </td>
+          </tr>
+          <tr>
+            <td colSpan="2" align="center">
+            <table align="center">
+            {attributes.myItems.catagory1.map((item, index) => (
+              <tr key={index}>
+                <td>{item[0]}</td> <td width="30%">{item[1]}</td> <td width="30%">{item[2]}</td>
+              </tr>
+            ))}
+            </table>
+          </td>
+          </tr>
     </tbody>
   </table>
   </div>
@@ -1003,14 +735,6 @@ export default function Edit({attributes,setAttributes}) {
       </div>
     </PanelBody>
     </InspectorControls>
-   
-          
-          
-          
- 
-
-
-
     </Fragment>
   );
         
